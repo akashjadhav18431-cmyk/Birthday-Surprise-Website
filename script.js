@@ -11,11 +11,11 @@ const CONFIG = {
     "May this year bring everything you've been dreaming of. 🎂"
   ],
   gallery: [
-    { icon:"📸", caption:"Where it began",   src:"images/pic1.jpg" },
-    { icon:"🌻", caption:"That golden day",  src:"images/pic2.jpg" },
-    { icon:"😂", caption:"Our funniest story", src:"images/pic3.jpg" },
-    { icon:"✈️", caption:"Adventures together", src:"images/pic4.jpg" },
-    { icon:"🩷", caption:"More memories ahead", src:"images/pic5.jpg" }
+    { icon:"📸", caption:"How it Started",   src:"images/pic1.jpeg" },
+    { icon:"🌻", caption:"That golden day",  src:"images/pic2.jpeg" },
+    { icon:"😂", caption:"Our funniest story", src:"images/pic3.jpeg" },
+    { icon:"✈️", caption:"I being your comfortable space", src:"images/pic4.jpeg" },
+    { icon:"🩷", caption:"More memories ahead", src:"images/pic5.jpeg" }
   ],
   letter: [
     "Happy Birthday! I hope today brings you lots of smiles, laughter, great food and wonderful memories.",
@@ -224,18 +224,15 @@ const noBtn = $("#noBtn"), qNote = $("#qNote");
 let noCount = 0;
 function dodge(){
   const r = noBtn.getBoundingClientRect();
-  const isMobile = innerWidth < 600;
-  const pad = isMobile ? 16 : 60;
-  const rangeX = isMobile ? rand(-50,50) : rand(-160,160);
-  const rangeY = isMobile ? rand(-30,30) : rand(-140,140);
-  let ny = r.top + rangeY;
-  if (isMobile) {
-    // keep No button in the lower half of the screen, away from Yes (top)
-    ny = Math.max(innerHeight * 0.55, Math.min(innerHeight - r.height - pad, ny));
-  } else {
-    ny = Math.max(pad, Math.min(innerHeight - r.height - pad, ny));
-  }
-  const nx = Math.max(pad, Math.min(innerWidth - r.width - pad, r.left + rangeX));
+  const pad = 12;
+  const box = document.querySelector(".q-box").getBoundingClientRect();
+  const yesRect = $("#yesBtn").getBoundingClientRect();
+  const minY = yesRect.bottom + 10;
+  const maxY = Math.max(minY, box.bottom - r.height - pad);
+  const minX = box.left + pad;
+  const maxX = Math.max(minX, box.right - r.width - pad);
+  const nx = minX + rand(0, maxX - minX);
+  const ny = minY + rand(0, maxY - minY);
   noBtn.style.position = "fixed";
   noBtn.style.left = nx+"px"; noBtn.style.top = ny+"px";
   qNote.textContent = CONFIG.noReplies[Math.min(noCount, CONFIG.noReplies.length-1)];

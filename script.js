@@ -225,11 +225,17 @@ let noCount = 0;
 function dodge(){
   const r = noBtn.getBoundingClientRect();
   const isMobile = innerWidth < 600;
-  const pad = isMobile ? 20 : 60;
-  const rangeX = isMobile ? rand(-60,60) : rand(-160,160);
-  const rangeY = isMobile ? rand(-50,50) : rand(-140,140);
+  const pad = isMobile ? 16 : 60;
+  const rangeX = isMobile ? rand(-50,50) : rand(-160,160);
+  const rangeY = isMobile ? rand(-30,30) : rand(-140,140);
+  let ny = r.top + rangeY;
+  if (isMobile) {
+    // keep No button in the lower half of the screen, away from Yes (top)
+    ny = Math.max(innerHeight * 0.55, Math.min(innerHeight - r.height - pad, ny));
+  } else {
+    ny = Math.max(pad, Math.min(innerHeight - r.height - pad, ny));
+  }
   const nx = Math.max(pad, Math.min(innerWidth - r.width - pad, r.left + rangeX));
-  const ny = Math.max(pad, Math.min(innerHeight - r.height - pad, r.top + rangeY));
   noBtn.style.position = "fixed";
   noBtn.style.left = nx+"px"; noBtn.style.top = ny+"px";
   qNote.textContent = CONFIG.noReplies[Math.min(noCount, CONFIG.noReplies.length-1)];

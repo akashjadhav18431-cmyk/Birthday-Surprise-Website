@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Happy Birthday ✨</title>
+<meta name="description" content="A little surprise made just for you" />
+<meta name="theme-color" content="#3d1f2b" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,500&family=Quicksand:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="ambient" aria-hidden="true">
+    <div class="bokeh"></div>
+    <div class="florals" id="florals"></div>
+  </div>
+
+  <canvas id="fx" aria-hidden="true"></canvas>
+
+  <header class="topbar">
+    <button class="music-btn" id="musicBtn" aria-label="Play music">
+      <span class="disc">♪</span><span class="mtext">Play us</span>
+    </button>
+  </header>
+  <audio id="bgMusic" loop preload="auto">
+    <source src="music/birthday.mp3" type="audio/mpeg" />
+  </audio>
+
+  <main id="app">
+
+    <!-- 1. LOADING -->
+    <section class="stage active" id="loader">
+      <div class="glass loader-box">
+        <span class="butterfly bf1">🦋</span>
+        <h2 class="prep">Preparing something special…</h2>
+        <div class="progress"><div class="bar" id="bar"></div></div>
+        <p class="percent" id="percent">0%</p>
+      </div>
+    </section>
+
+    <!-- 2. GIFT BOX -->
+    <section class="stage" id="gift">
+      <p class="eyebrow">A little something for</p>
+      <h2 class="gift-name" id="giftName">you</h2>
+      <div class="gift-stage">
+        <div class="giftbox" id="giftbox" role="button" tabindex="0" aria-label="Open gift">
+          <div class="box-back"></div>
+          <div class="box-front">
+            <span class="rv"></span><span class="rh"></span>
+          </div>
+          <div class="lid">
+            <span class="rv"></span><span class="rh"></span>
+            <span class="bow">🎀</span>
+          </div>
+        </div>
+        <div class="glow-ring"></div>
+      </div>
+      <p class="hint pulse">Tap the gift to open it</p>
+    </section>
+
+    <!-- 3. REVEAL -->
+    <section class="stage" id="reveal">
+      <p class="eyebrow" id="revealEyebrow">Today is all about you</p>
+      <h1 class="hb">Happy Birthday</h1>
+      <div class="name-letters" id="nameLetters"></div>
+      <div class="messages" id="messages"></div>
+      <button class="btn" data-next="memory">Continue <span>✨</span></button>
+    </section>
+
+    <!-- 4. MEMORY GALLERY -->
+    <section class="stage" id="memory">
+      <p class="eyebrow">Our little album</p>
+      <h2 class="sec-title">Favourite Memories</h2>
+      <p class="swipe-hint">swipe / drag →</p>
+      <div class="rail" id="rail"></div>
+      <button class="btn ghost" data-next="letter">Next <span>💌</span></button>
+    </section>
+
+    <!-- 5. LETTER -->
+    <section class="stage" id="letter">
+      <div class="paper">
+        <div class="paper-fold"></div>
+        <h2 class="script">Dear Shravu!🩷,</h2>
+        <p class="typed" id="typed"></p>
+        <p class="sign">with love,<br><span class="script" id="signName"></span></p>
+      </div>
+      <button class="btn" data-next="question" id="letterBtn" style="opacity:0;pointer-events:none">I have a question… <span>💗</span></button>
+    </section>
+
+    <!-- 6. YES / NO -->
+    <section class="stage" id="question">
+      <div class="glass q-box">
+        <h2 class="q-title" id="qTitle">Do you know how special you are?</h2>
+        <div class="q-actions">
+          <button class="btn yes" id="yesBtn">Yes 💖</button>
+          <button class="btn no" id="noBtn">No</button>
+        </div>
+        <p class="q-note" id="qNote"></p>
+      </div>
+    </section>
+
+    <!-- 7. FIVE SURPRISES -->
+    <section class="stage" id="surprises">
+      <p class="eyebrow">Open them one by one</p>
+      <h2 class="sec-title">5 Little Surprises</h2>
+      <div class="grid" id="surpriseGrid"></div>
+      <button class="btn ghost" data-next="cake" id="surpriseBtn" style="opacity:0;pointer-events:none">Now, the cake 🎂</button>
+    </section>
+
+    <!-- 8. CAKE -->
+    <section class="stage" id="cake">
+      <h2 class="sec-title">Make a birthday wish…</h2>
+      <div class="cake-scene">
+        <div class="cake" id="cakeEl">
+          <div class="candle"><span class="flame" id="flame"></span><span class="smoke"></span></div>
+          <div class="tier t3"></div><div class="tier t2"></div><div class="tier t1"></div>
+          <div class="plate"></div>
+        </div>
+        <div class="glow-ring big"></div>
+      </div>
+      <p class="hint" id="cakeHint">Blow into your mic — or tap the cake 💨</p>
+      <button class="btn" data-next="final" id="cakeBtn" style="opacity:0;pointer-events:none">See your wish ✨</button>
+    </section>
+
+    <!-- 9. FINAL -->
+    <section class="stage" id="final">
+      <div class="final-glow"></div>
+      <h1 class="hb big">Happy Birthday</h1>
+      <div class="name-letters" id="finalName"></div>
+      <p class="final-line" id="finalLine"></p>
+      <div class="bouquet" aria-hidden="true">🌹🌷🌸🌺🌼</div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
